@@ -1,0 +1,560 @@
+=============================================================================================================================================
+
+# Docker
+------
+#! /bin/bash
+#Uninstall old versions first
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine \
+                  podman \
+                  runc
+sudo yum remove docker*
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+yum list docker-ce --showduplicates | sort -r
+#yum list docker-ce-cli --showduplicates | sort -r
+#docker-ce-3:24.0.0-1.el8 (docker-ce-<VERSION_STRING>)
+#sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
+
+#sudo yum install docker-ce-3:24.0.0-1.el8 docker-ce-cli-1:24.0.0-1.el8 containerd.io docker-buildx-plugin docker-compose-plugin
+
+sudo yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+systemctl start docker
+systemctl enable docker
+mkdir /u01/docker 
+rsync -avxP /var/lib/docker/  /u01/docker  
+#sudo nano /lib/systemd/system/docker.service 
+#Find the following line:  ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock & Replace this (--data-root /u01/docker) using below command
+#sed -i '13s|existingword|existingword newword|' /lib/systemd/system/docker.service
+sed -i '13s|/usr/bin/dockerd|/usr/bin/dockerd --data-root /u01/docker|' /lib/systemd/system/docker.service
+systemctl daemon-reload
+systemctl restart docker
+
+#Docker compose installation
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-$(uname -s)-$(uname -m)"  -o /usr/local/bin/docker-compose
+sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo chmod +x /usr/bin/docker-compose
+#sudo yum install docker-compose-plugin
+docker-compose --version
+yum install maven -y
+yum install telnet -y
+yum install git -y
+
+
+==============================================================================================================================================
+## LATEST Version #####
+#wget https://repo.mysql.com/mysql80-community-release-el9-5.noarch.rpm
+#curl -O https://repo.mysql.com/mysql80-community-release-el9-5.noarch.rpm
+#sudo rpm -Uvh mysql80-community-release-el9-5.noarch.rpm
+#sudo yum install mysql-community-server
+
+sudo yum remove mysql* -y
+sudo yum remove mysql-community-server -y
+sudo yum remove mysql-client mysql-server -y
+sudo rm -rf /etc/mysql 
+sudo rm -rf /var/lib/mysql  
+sudo rm -rf /var/log/mysqld.log 
+
+sudo yum install -y wget
+sudo wget https://dev.mysql.com/get/mysql80-community-release-el8-4.noarch.rpm
+sudo yum install mysql80-community-release-el8-4.noarch.rpm -y
+sudo yum-config-manager --disable mysql57-community
+sudo yum-config-manager --enable mysql80-community
+sudo yum repolist enabled | grep mysql
+sudo yum module disable mysql
+sudo yum install mysql-community-server -y
+sudo systemctl start mysqld
+sudo systemctl status mysqld
+cat /var/log/mysqld.log | grep "temporary password"
+
+
+error: GPG Keys are configured as: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql-2022, file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql Public key for mysql-community-client-plugins-8.0.37-1.el8.x86_64.rpm is not installed. Failing package is: mysql-community-client-plugins-8.0.37-1.el8.x86_64
+Solution : rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+
+=====================================
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'DB@tesT2#';
+CREATE USER 'flywayUser'@'%' IDENTIFIED WITH mysql_native_password BY 'DB@tesT21#';
+GRANT ALL PRIVILEGES ON *.* TO 'flywayUser'@'%' WITH GRANT OPTION;
+GRANT REPLICATION SLAVE ON *.* TO 'flywayUser'@'%';
+GRANT RELOAD, LOCK TABLES, PROCESS, REPLICATION CLIENT ON *.* TO 'flywayUser'@'%';
+
+
+===================================================
+it is not working ERROR: mysql passwd not working 
+sudo mkdir /u01
+sudo chown -R mysql:mysql /u01
+sudo systemctl status mysqld
+sudo systemctl stop mysqld
+sudo systemctl status mysqld
+cd /var/lib/mysql
+ls -lrt
+sudo rsync -av /var/lib/mysql /u01
+sudo mv /var/lib/mysql /var/lib/mysql-$(date "+%Y%m%d_%H%M%S").bak
+sudo cp -r /etc/my.cnf /etc/my.cnf.bkp
+sed -i '27s|datadir=/var/lib/mysql|datadir=/u01/mysql|' /etc/my.cnf
+sed -i '28s|socket=/var/lib/mysql/mysql.sock|socket=/u01/mysql/mysql.sock|' /etc/my.cnf
+echo -e "[client]\nport=3306\nsocket=/u01/mysql/mysql.sock" >> /etc/my.cnf
+sudo setenforce 0
+sudo sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/sysconfig/selinux
+sudo systemctl start mysqld
+sudo systemctl status mysqld
+
+
+
+
+sudo sed -i '23s|wsrep_cluster_address=gcomm://|wsrep_cluster_address=gcomm://52.66.74.198,65.3.456.56,56.567.76.8|' /etc/my.cnf
+sudo sed -i '37s|#wsrep_node_address=192.168.70.63|wsrep_node_address=52.66.74.198|' /etc/my.cnf
+sed -i '42s|wsrep_node_name=pxc-cluster-node-1|wsrep_node_name=Db-1|' /etc/my.cnf
+========================================================================================================================================
+
+yum install java-11-openjdk-devel
+update-alternatives --config java
+yum install wget
+wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum repolist
+yum install jenkins
+systemctl start jenkins
+systemctl status jenkins
+systemctl enable jenkins
+
+
+passwd : 50974c5f419d4794ac8853db39927569
+
+adminuser : sarath
+passwd : Saho1995@
+
+
+
+
+
+#! /bin/bash
+url=http://3.111.253.246:8080
+
+user='sarath'
+password='Saho1995@'
+
+cookie_jar="$(mktemp)"
+full_crumb=$(curl -u "$user:$password" --cookie-jar "$cookie_jar" $url/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
+arr_crumb=(${full_crumb//:/ })
+only_crumb=$(echo ${arr_crumb[1]})
+
+# MAKE THE REQUEST TO DOWNLOAD AND INSTALL REQUIRED MODULES
+curl -X POST -u "$user:$password" $url/pluginManager/installPlugins \
+  -H 'Connection: keep-alive' \
+  -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+  -H 'X-Requested-With: XMLHttpRequest' \
+  -H "$full_crumb" \
+  -H 'Content-Type: application/json' \
+  -H 'Accept-Language: en,en-US;q=0.9,it;q=0.8' \
+  --cookie $cookie_jar \
+  --data-raw "{'dynamicLoad':true,'plugins':['Active-Choices','Ant','Apache-HttpComponents-Client-4.x-API-Plugin','Authentication-Tokens-API-Plugin','Bitbucket-Branch-Source','Bitbucket-OAuth-Plugin','Bitbucket-Plugin','Bitbucket-Pullrequest-Builder-Plugin','Bitbucket-Push-and-Pull-Request','Blue-Ocean-Core-JS','Bootstrap-4-API','Bootstrap-5-API-Plugin','bouncycastle-API','Branch-API','Build-Timeout','Caffeine-API','Checks-API','CloudBees-AWS-Credentials-Plugin','Cobertura','Code-Coverage-API','Command-Agent-Launcher','Common-API-for-Blue-Ocean','commons-lang3-v3.x-Jenkins-API','commons-text-API','Conditional-BuildStep','Config-File-Provider','Configuration-as-Code','Convert-To-Pipeline','Credentials','Credentials-Binding','DataTables.net-API-Plugin','Design-Language','Display-URL-API','Distributed-Workspace-Clean-plugin','Docker-Commons','Docker-Pipeline','Durable-Task','ECharts-API-Plugin'],'Jenkins-Crumb':'$only_crumb'}"
+  --data-raw "{'dynamicLoad':true,'plugins':['Email-Ext-Recipients-Column','Email-Extension','Email-Extension-Template','EnvInject-API','Environment-Injector','External-Monitor-Job-Type','Favorite','Folder-based-Authorization-Strategy','Folders','Font-Awesome-API','Forensics-API','Git','Git-client','Git-Parameter','Git-server-Plugin','GitHub','GitHub-API','GitHub-Branch-Source','Gradle','Handy-Uri-Templates-2.x-API-Plugin','HTML-Publisher-plugin','Infrastructure-plugin-for-Publish-Over-X','Instance-Identity','Ionicons-API','Jackson-2-API','JaCoCo','Jakarta-Activation-API','Jakarta-Mail-API','Java-JSON-Web-Token-(JJWT)-Plugin','JavaBeans-Activation-Framework-(JAF)-API','Javadoc-Plugin','JavaMail-API','JavaScript-GUI-Lib:-ACE-Editor-bundle-plugin','JavaScript-GUI-Lib:-Handlebars-bundle-plugin','JavaScript-GUI-Lib:-jQuery-bundles-(jQuery-and-jQuery-UI)-plugin'],'Jenkins-Crumb':'$only_crumb'}"
+   --data-raw "{'dynamicLoad':true,'plugins':['JavaScript-GUI-Lib:-Moment.js-bundle-plugin','JAXB-plugin','Job-Configuration-History-Plugin','Job-DSL','jQuery-plugin','JQuery3-API-Plugin','JSch-dependency','JUnit','JWT-for-Blue-Ocean','LDAP','Lighthouse-Report-Plugin','List-Git-Branches-Parameter'','Lockable-Resources','Mail-Watcher-Plugin','Mailer','MapDB-API','Mask-Passwords','Matrix-Authorization-Strategy','Matrix-Project','Maven-Integration-plugin','Mercurial','Mina-SSHD-API-::-Common','Mina-SSHD-API-::-Core','Nexus-Artifact-Uploader','Nexus-Platform-Plugin','Node-and-Label-parameter','NodeJS','Office-365-Connector'],'Jenkins-Crumb':'$only_crumb'}"
+   --data-raw "{'dynamicLoad':true,'plugins':['Configuration-as-Code','Convert-To-Pipeline','Credentials','Credentials-Binding','DataTables.net-API-Plugin','Design-Language','Display-URL-API','Distributed-Workspace-Clean-plugin','Docker-Commons','Docker-Pipeline','Durable-Task','ECharts-API-Plugin','Email-Ext-Recipients-Column','Email-Extension','Email-Extension-Template','EnvInject-API','Environment-Injector','External-Monitor-Job-Type','Favorite','Folder-based-Authorization-Strategy','Folders','Font-Awesome-API','Forensics-API','Git','Git-client','Git-Parameter','Git-server-Plugin','GitHub','GitHub-API','GitHub-Branch-Source','Gradle','Handy-Uri-Templates-2.x-API-Plugin','HTML-Publisher-plugin','Infrastructure-plugin-for-Publish-Over-X','Instance-Identity','Ionicons-API','Jackson-2-API','JaCoCo','Jakarta-Activation-API','Jakarta-Mail-API','Java-JSON-Web-Token-(JJWT)-Plugin','JavaBeans-Activation-Framework-(JAF)-API','Javadoc-Plugin','JavaMail-API','JavaScript-GUI-Lib:-ACE-Editor-bundle-plugin','JavaScript-GUI-Lib:-Handlebars-bundle-plugin','JavaScript-GUI-Lib:-jQuery-bundles-(jQuery-and-jQuery-UI)-plugin'],'Jenkins-Crumb':'$only_crumb'}" 
+   --data-raw "{'dynamicLoad':true,'plugins':['OkHttp','Oracle-Java-SE-Development-Kit-Installer','OWASP-Markup-Formatter','PAM-Authentication','Parameterized-Trigger-plugin','Pipeline','Pipeline-Graph-Analysis-Plugin','Pipeline-implementation-for-Blue-Ocean','Pipeline-SCM-API-for-Blue-Ocean','Pipeline-Utility-Steps','Pipeline:-Basic-Steps','Workspace-Cleanup','WMI-Windows-Agents-Plugin','Web-for-Blue-Ocean','Variant','Trilead-API-Plugin','Token-Macro','Timestamper','ThinBackup','Subversion','Structs','SSH-server','SSH-Credentials-Plugin','SSH-Build-Agents','SonarQube-Scanner','Sonar-Quality-Gates-Plugin','SnakeYAML-API','Script-Security','SCM-Skip-Plugin','SCM-API','Run-Condition-Plugin','Role-based-Authorization-Strategy'],'Jenkins-Crumb':'$only_crumb'}"
+  --data-raw "{'dynamicLoad':true,'plugins':['REST-Implementation-for-Blue-Ocean','REST-API-for-Blue-Ocean','Resource-Disposer','Rebuilder','Pub-Sub-"light"-Bus','Post-build-task','Popper.js-API','Popper.js-2-API-Plugin','Plugin-Utilities-API','Plain-Credentials-Plugin','Pipeline:-API','Pipeline:-Supporting-APIs','Pipeline:-Step-API','Pipeline:-Stage-View','Pipeline:-Stage-Tags-Metadata','Pipeline:-Stage-Step','Pipeline:-SCM-Step','Pipeline:-REST-API','Pipeline:-Nodes-and-Processes','Pipeline:-Multibranch','Pipeline:-Model-API','Pipeline:-Milestone-Step','Pipeline:-Job','Pipeline:-Input-Step','Pipeline:-Groovy-Libraries','Pipeline:-Groovy','Pipeline:-GitHub-Groovy-Libraries','Pipeline:-Deprecated-Groovy-Libraries','Pipeline:-Declarative-Extension-Points-API','Pipeline:-Declarative','Pipeline:-Build-Step'],'Jenkins-Crumb':'$only_crumb'}"
+ 
+ 
+ 
+ ==============================================================================================================================================
+  
+#! /bin/bash
+yum install java-1.8.0-openjdk.x86_64 -y
+mkdir /app && cd /app
+wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+tar -zxvf nexus.tar.gz
+mv nexus-3* nexus
+sudo adduser nexus
+sudo chown -R nexus:nexus /app/nexus
+sudo chown -R nexus:nexus /app/sonatype-work
+echo 'run_as_user = "nexus"' | cat > nexus/bin/nexus.rc
+
+sudo tee /etc/systemd/system/nexus.service <<EOF
+[Unit]
+Description=nexus service
+After=network.target
+
+[Service]
+Type=forking
+LimitNOFILE=65536
+User=nexus
+Group=nexus
+ExecStart=/app/nexus/bin/nexus start
+ExecStop=/app/nexus/bin/nexus stop
+User=nexus
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo chkconfig nexus on
+systemctl start nexus
+systemctl status nexus
+cat /app/sonatype-work/nexus3/admin.password
+
+=====================================================
+#!/bin/bash
+
+# Set variables
+jenkins_version="2.426.3"
+jenkins_home="/u01/jenkins"
+
+#sudo mkdir -p /u01/jenkins
+
+#sudo chown -R jenkins:jenkins /u01/jenkins
+
+# Stop Jenkins service
+sudo systemctl stop jenkins || true  # Ignore errors if Jenkins is not running
+
+# Remove Jenkins packages
+sudo yum remove -y jenkins
+
+# Remove Jenkins data directory
+sudo rm -rf "$jenkins_home"
+
+# Install Java (if not already installed)
+#sudo yum install -y java-11-openjdk
+sudo yum install java-17-openjdk-devel -y
+
+# Download Jenkins package
+wget -O "/tmp/jenkins-${jenkins_version}.rpm" "https://pkg.jenkins.io/redhat-stable/jenkins-${jenkins_version}-1.1.noarch.rpm"
+
+# Install Jenkins
+sudo yum install -y "/tmp/jenkins-${jenkins_version}.rpm"
+
+# Create Jenkins service drop-in directory
+sudo mkdir -p /etc/systemd/system/jenkins.service.d/
+
+# Create a systemd drop-in configuration file
+sudo tee /etc/systemd/system/jenkins.service.d/jenkins.conf > /dev/null << EOF
+[Service]
+Environment="JENKINS_HOME=${jenkins_home}"
+EOF
+
+# Start Jenkins service
+sudo systemctl start jenkins
+
+# Enable Jenkins service on boot
+sudo systemctl enable jenkins
+
+sudo mkdir -p /u01/jenkins
+
+sudo chown -R jenkins:jenkins /u01/jenkins
+
+# reStart Jenkins service
+sudo systemctl restart jenkins
+=========================================================
+---
+- name: Remove existing Jenkins and install specific version
+  hosts: localhost
+  become: true
+
+  vars:
+    jenkins_version: "2.375.2"  # Set the desired Jenkins version
+    jenkins_home: "/u01/jenkins"  # Set the desired Jenkins home directory
+
+  tasks:
+    - name: Stop Jenkins service
+      systemd:
+        name: jenkins
+        state: stopped
+      ignore_errors: yes
+
+    - name: Remove Jenkins packages
+      package:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - jenkins
+
+    - name: Remove Jenkins data directory
+      file:
+        path: "{{ jenkins_home }}"
+        state: absent
+
+    - name: Install Java (if not already installed)
+      yum:
+        name: java-11-openjdk
+        state: present
+
+    - name: Download Jenkins package
+      get_url:
+        url: "https://pkg.jenkins.io/redhat-stable/jenkins-{{ jenkins_version }}-1.1.noarch.rpm"
+        dest: "/tmp/jenkins-{{ jenkins_version }}.rpm"
+
+    - name: Install Jenkins
+      yum:
+        name: "/tmp/jenkins-{{ jenkins_version }}.rpm"
+        state: present
+
+    - name: Configure Jenkins home directory
+      lineinfile:
+        path: /etc/sysconfig/jenkins
+        regexp: '^JENKINS_HOME='
+        line: 'JENKINS_HOME="{{ jenkins_home }}"'
+
+    - name: Start Jenkins service
+      systemd:
+        name: jenkins
+        state: started
+
+    - name: Enable Jenkins service on boot
+      systemd:
+        name: jenkins
+        enabled: true
+
+================================================================================================================
+
+    - name: Set Docker Compose version
+      lineinfile:
+        path: /usr/local/bin/docker-compose
+        line: '#!/usr/bin/env sh'
+        insertbefore: BOF
+
+    - name: Change Docker data location
+      systemd:
+        name: docker
+        dropin:
+          name: override.conf
+          content: |
+            [Service]
+            ExecStart=
+            ExecStart=/usr/bin/dockerd --data-root=/u01/docker
+
+    - name: Restart Docker service
+      systemd:
+        name: docker
+        state: restarted
+
+==============================================================
+ 
+ ---
+- name: Install Docker and Docker Compose on RHEL 8
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Install required packages
+      dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+
+    - name: Add Docker repository
+      yum_repository:
+        name: docker-ce
+        description: Docker CE Stable - $basearch
+        baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+        gpgkey: https://download.docker.com/linux/centos/gpg
+        enabled: yes
+        gpgcheck: yes
+
+    - name: Install Docker
+      yum:
+        name: docker-ce
+        state: present
+
+    - name: Start and enable Docker service
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+          #    - name: Install Docker Compose
+          #  pip:
+          #  name: docker-compose
+          # state: present
+          #
+    - name: Download specific version of Docker Compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'a+x'
+
+      vars:
+        docker_compose_version: "1.29.2"
+
+    - name: Set Docker data directory to /u01
+      lineinfile:
+        # path: /etc/sysconfig/docker
+        path: /lib/systemd/system/docker.service
+          #line: 'OPTIONS="--data-root=/u01/docker"'
+          #line: 'ExecStart=/usr/bin/dockerd --data-root=/u01/docker'
+        line: 'ExecStart=/usr/bin/dockerd --data-root /u01/docker -H fd:// --containerd=/run/containerd/containerd.sock'
+        regexp: '^ExecStart='
+      notify: restart docker
+
+  handlers:
+    - name: restart docker
+      systemd:
+        name: docker
+        state: restarted
+ 
+ 
+ 
+ 
+ ============================================================================================================
+ 
+ ---
+- name: Remove existing MySQL and install MySQL Community Edition
+  hosts: your_target_server
+  become: yes
+
+  tasks:
+    - name: Stop MySQL service if running
+      systemd:
+        name: mysqld
+        state: stopped
+      ignore_errors: yes
+
+    - name: Remove existing MySQL packages
+      package:
+        name:
+          - mysql
+          - mysql-server
+          - mysql-libs
+        state: absent
+
+    - name: Remove MySQL data directory
+      file:
+        path: /var/lib/mysql
+        state: absent
+
+    - name: Install MySQL Community Edition repository
+      yum_repository:
+        name: mysql-community
+        description: MySQL Community Edition
+        baseurl: https://repo.mysql.com/yum/mysql-8.0-community/el/8/$basearch/
+        gpgcheck: yes
+        gpgkey: https://repo.mysql.com/RPM-GPG-KEY-mysql
+        enabled: yes
+
+    - name: Install MySQL Community Server
+      package:
+        name: mysql-community-server
+        state: present
+
+    - name: Start MySQL service
+      systemd:
+        name: mysqld
+        state: started
+### NOT WORKING ####################
+    - name: Set root password for MySQL
+      expect:
+        command: mysql_secure_installation
+        responses:
+          'Enter current password for root (enter for none):': '\r'
+          'Set root password? [Y/n]': 'Y\r'
+          'New password:': 'Sarath@12345\r'
+          'Re-enter new password:': 'Sarath@12345\r'
+          'Remove anonymous users? [Y/n]': 'Y\r'
+          'Disallow root login remotely? [Y/n]': 'Y\r'
+          'Remove test database and access to it? [Y/n]': 'Y\r'
+          'Reload privilege tables now? [Y/n]': 'Y\r'
+
+  vars:
+    your_mysql_root_password: Sarath@12345
+
+ 
+ ==========================================================================================================
+ SSL EXPIRE ALERT
+ ===========================================
+ #!/bin/bash
+
+# Websites to check (replace with your actual domains)
+WEBSITES=("impresacx-dev.abjayon.com" "impresa-fieldwork-dev.abjayon.com" "impresa-admin-dev.abjayon.com" "impresa-prepaidinsights-dev.abjayon.com")
+
+# Function to check SSL certificate expiration
+check_ssl_expiry() {
+    domain=$1
+    expiration_date=$(openssl s_client -servername $domain -connect $domain:443 2>/dev/null | openssl x509 -noout -dates | grep "notAfter" | cut -d= -f2)
+    expiration_epoch=$(date -d "$expiration_date" +"%s")
+    current_epoch=$(date +"%s")
+    remaining_days=$(( ($expiration_epoch - $current_epoch) / (60*60*24) ))
+    echo "SSL certificate for $domain will expire in $remaining_days days."
+	
+    # Fail the Jenkins job if remaining days are less than 5
+    if [ $remaining_days -lt 5 ]; then
+        echo "SSL certificate for $domain has less than 5 days remaining. Failing Jenkins job."
+        exit 1
+    fi
+}
+
+# Loop through each website
+for website in "${WEBSITES[@]}"; do
+    check_ssl_expiry "$website"
+done
+ 
+==========================================================================================================================
+Correct script or Nexus 
+------
+#!/bin/bash
+yum install java-1.8.0-openjdk.x86_64 -y
+#wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+wget https://download.sonatype.com/nexus/3/nexus-3.64.0-04-unix.tar.gz
+mkdir /u01/nexus
+tar xzf nexus-3.64.0-04-unix.tar.gz -C /u01/nexus --strip-components=1
+
+#validate using below
+ls /u01/nexus
+
+#update ownership
+chown -R nexus: /u01/nexus
+
+#update user to run jenkins
+sed -i 's/#run_as_user=""/run_as_user="nexus"/' /u01/nexus/bin/nexus.rc
+
+#update nexus work directory
+sed -i 's^../sonatype-work^./sonatype-work^' /u01/nexus/bin/nexus.vmoptions
+
+#Create Service file
+cat > /etc/systemd/system/nexus.service << 'EOL'
+[Unit]
+Description=nexus service
+After=network.target
+
+[Service]
+Type=forking
+LimitNOFILE=65536
+ExecStart=/u01/nexus/bin/nexus start
+ExecStop=/u01/nexus/bin/nexus stop
+User=nexus
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+#Reload systemctl deamon to load nexus service & enable nexus service
+systemctl daemon-reload
+systemctl enable --now nexus.service
+
+
+#validate the service using below command
+systemctl status nexus
+ 
+##### Error #############
+error: systemd[78820]: nexus.service: Failed to determine user credentials: No such process
+Nov 15 05:38:18 jajtlmdms41377-CSS-Container-Registry systemd[78820]: nexus.service: Failed at step USER spawning /opt/nexus/bin/nexus: No such process
+
+
+Solution :  
+sudo useradd -r -s /bin/false nexus
+sudo chown -R nexus:nexus /opt/nexus
+sudo systemctl daemon-reload
+sudo systemctl start nexus.service
+
+##################################################
+ 
+ 

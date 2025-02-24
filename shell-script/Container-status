@@ -1,0 +1,44 @@
+#########1st code #######
+
+#!/bin/bash
+
+# This script will list all the docker containers in table format
+
+# Get the list of running containers
+containers=$(docker ps -a)
+
+# Display the header
+echo -e "Name\tImage\tStatus"
+
+# Loop through the list of running containers
+for container in $containers
+do
+    # Get the container name
+    containerName=$(echo $container | awk '{print $NF}')
+
+    # Get the container image
+    containerImage=$(echo $container | awk '{print $(NF-1)}')
+
+    # Get the container status
+    containerStatus=$(echo $container | awk '{print $(NF-2)}')
+
+    # Display the information
+    echo -e "$containerName\t$containerImage\t$containerStatus"
+done
+
+
+#########2nd code ##################
+#!/bin/bash
+host=10.10.102.15
+# This script will list all of the running Docker containers
+
+# Get a list of all containers
+docker ps -a
+
+# Loop through each container
+for container in $(docker ps -aq); do
+    # Check the status of the container
+    status=$(docker inspect --format '{{.State.Status}}' $container) 
+    # Print the container ID and status
+    echo "Container $container is $status"
+done
