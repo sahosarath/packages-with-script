@@ -1,0 +1,299 @@
+---
+- name: Install Docker and Docker Compose on RHEL 8
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Install required packages
+      dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+
+    - name: Add Docker repository
+      yum_repository:
+        name: docker-ce
+        description: Docker CE Stable - $basearch
+        baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+        gpgkey: https://download.docker.com/linux/centos/gpg
+        enabled: yes
+        gpgcheck: yes
+
+    - name: Install Docker
+      yum:
+        name: docker-ce
+        state: present
+
+    - name: Start and enable Docker service
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: Download specific version of Docker Compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'a+x'
+
+      vars:
+        docker_compose_version: "1.29.2"
+
+    - name: Set Docker data directory to /u01
+      lineinfile:
+        path: /lib/systemd/system/docker.service
+        line: 'ExecStart=/usr/bin/dockerd --data-root /u01/docker -H fd:// --containerd=/run/containerd/containerd.sock'
+        regexp: '^ExecStart='
+        backup: yes
+      notify: restart docker
+
+    - name: Reload systemd
+      command: systemctl daemon-reload
+      notify: restart docker
+
+  handlers:
+    - name: restart docker
+      systemd:
+        name: docker
+        state: restarted
+
+#===========================================================================================
+
+---
+- name: Setup MySQL Community Edition on RHEL 8
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Install MySQL Community Server
+      dnf:
+        name: mysql-community-server
+        state: present
+
+    - name: Enable and start MySQL service
+      systemd:
+        name: mysqld
+        enabled: yes
+        state: started
+
+    - name: Add datadir line to my.cnf
+      lineinfile:
+        path: /etc/my.cnf
+        regexp: '^datadir='
+        line: 'datadir=/u01/mysql'
+          # insertafter: '^#datadir='  # Assuming the original line is commented out
+        state: present
+      notify: restart mysql
+
+    - name: Add socket line to my.cnf
+      lineinfile:
+        path: /etc/my.cnf
+        regexp: '^socket=/var/lib/mysql/mysql.sock'
+        line: 'socket=/u01/mysql/mysql.sock'
+          #insertafter: '^#socket='  # Assuming the original line is commented out
+        state: present
+      notify: restart mysql
+
+    - name: Add [client] section to my.cnf
+      blockinfile:
+        path: /etc/my.cnf
+        block: |
+          [client]
+          port=3306
+          socket=/u01/mysql/mysql.sock
+
+  handlers:
+    - name: restart mysql
+      systemd:
+        name: mysqld
+        state: restarted
+
+================================================================================
+Without dir change
+##########################################
+---
+- name: Remove existing MySQL and install MySQL Community Edition
+  hosts: your_target_server
+  become: yes
+
+  tasks:
+    - name: Stop MySQL service if running
+      systemd:
+        name: mysqld
+        state: stopped
+      ignore_errors: yes
+
+    - name: Remove existing MySQL packages
+      package:
+        name:
+          - mysql
+          - mysql-server
+          - mysql-libs
+        state: absent
+
+    - name: Remove MySQL data directory
+      file:
+        path: /var/lib/mysql
+        state: absent
+
+    - name: Install MySQL Community Edition repository
+      yum_repository:
+        name: mysql-community
+        description: MySQL Community Edition
+        baseurl: https://repo.mysql.com/yum/mysql-8.0-community/el/8/$basearch/
+        gpgcheck: yes
+        gpgkey: https://repo.mysql.com/RPM-GPG-KEY-mysql
+        enabled: yes
+
+    - name: Install MySQL Community Server
+      package:
+        name: mysql-community-server
+        state: present
+
+    - name: Start MySQL service
+      systemd:
+        name: mysqld
+        state: started
+#############################################################
+
+### Nexus   #########
+===========================================================
+sudo tee /etc/systemd/system/nexus.service.j2 <<EOF
+[Unit]
+Description=nexus service
+After=network.target
+
+[Service]
+Type=forking
+LimitNOFILE=65536
+User=nexus
+Group=nexus
+ExecStart=/app/nexus/bin/nexus start
+ExecStop=/app/nexus/bin/nexus stop
+User=nexus
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+EOF
+==========
+echo 'run_as_user = "nexus"' | cat > nexus/bin/nexus.rc
+==========
+---
+- name: Install and Configure Nexus
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Create Nexus user
+      user:
+        name: nexus
+        comment: Nexus User
+        home: /root/sarath/ansible/nexus
+        system: true
+
+    - name: Download Nexus
+      get_url:
+        url: "https://download.sonatype.com/nexus/3/latest-unix.tar.gz"
+        dest: /root/sarath/ansible/nexus.tar.gz
+
+    - name: Extract Nexus
+      ansible.builtin.unarchive:
+        src: /root/sarath/ansible/nexus.tar.gz
+        dest: /root/sarath/ansible/nexus
+        remote_src: true
+
+    - name: Set Nexus ownership
+      file:
+        path: /root/sarath/ansible/nexus
+        owner: nexus
+        group: nexus
+        recurse: yes
+
+#    - name: Create nexus.rc file
+#      ansible.builtin.copy:
+#        content: |
+#          run_as_user="nexus"
+#        dest: '/app/nexus/bin/nexus.rc'
+#        owner: nexus
+#        group: nexus
+#        mode: '0644'
+
+    - name: Create Nexus service file
+      template:
+        src: /etc/systemd/system/nexus.service.j2
+        dest: /etc/systemd/system/nexus.service
+      notify: Restart Nexus
+
+    - name: Start Nexus service
+      systemd:
+        name: nexus
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: restart nexus
+      systemd:
+        name: nexus
+        state: restarted
+================================================================================
+Jenkins 
+====================================
+---
+- name: Remove existing Jenkins and install specific version
+  hosts: localhost
+  become: true
+
+  vars:
+    jenkins_version: "2.375.2"  # Set the desired Jenkins version
+
+  tasks:
+    - name: Stop Jenkins service
+      systemd:
+        name: jenkins
+        state: stopped
+      ignore_errors: yes
+
+    - name: Remove Jenkins packages
+      package:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - jenkins
+
+    - name: Remove Jenkins data directory
+      file:
+        path: "/var/lib/{{ item }}"
+        state: absent
+      with_items:
+        - jenkins
+
+    - name: Install Java (if not already installed)
+      yum:
+        name: java-11-openjdk
+        state: present
+
+    - name: Download Jenkins package
+      get_url:
+        url: "https://pkg.jenkins.io/redhat-stable/jenkins-{{ jenkins_version }}-1.1.noarch.rpm"
+        dest: "/tmp/jenkins-{{ jenkins_version }}.rpm"
+
+    - name: Install Jenkins
+      yum:
+        name: "/tmp/jenkins-{{ jenkins_version }}.rpm"
+        state: present
+
+    - name: Start Jenkins service
+      systemd:
+        name: jenkins
+        state: started
+
+    - name: Enable Jenkins service on boot
+      systemd:
+        name: jenkins
+        enabled: true
+==================================================
+

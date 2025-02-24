@@ -1,0 +1,388 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<project>
+<actions/>
+<description/>
+<keepDependencies>false</keepDependencies>
+<properties>
+<org.jenkinsci.plugins.mavenrepocleaner.MavenRepoCleanerProperty plugin="maven-repo-cleaner@1.3">
+<notOnThisProject>false</notOnThisProject>
+</org.jenkinsci.plugins.mavenrepocleaner.MavenRepoCleanerProperty>
+<com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@330.v645b_7df10e2a_">
+<autoRebuild>false</autoRebuild>
+<rebuildDisabled>false</rebuildDisabled>
+</com.sonyericsson.rebuild.RebuildSettings>
+<hudson.model.ParametersDefinitionProperty>
+<parameterDefinitions>
+<hudson.model.StringParameterDefinition>
+<name>aws_region</name>
+<defaultValue>ap-south-1</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>CLIENT_ID_KEYCLOAK</name>
+<defaultValue>admin-cli</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>REALM_VALUE</name>
+<defaultValue>adss</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>CHAT_BOT_NAME</name>
+<defaultValue>Mitr</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>BASE_TENANT_CODE</name>
+<defaultValue>EMI</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>HAZELCAST_HOST_PORT_VALUE</name>
+<defaultValue>172.30.2.45</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>SMTP_MAIL_ID</name>
+<defaultValue>no_reply_impresacx@abjayon.com</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>SMTP_MAIL_HOST</name>
+<defaultValue>https://api.mailjet.com/v3.1/send</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>SMTP_MAIL_PORT</name>
+<defaultValue>587</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>SMTP_MAIL_USER</name>
+<defaultValue>no_reply_impresacx@abjayon.com</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>AUTH_UI_SECRET_KEYCLOAK</name>
+<trim>true</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>MYSQL_SCHEDULE_INTERVAL</name>
+<defaultValue>0 0 * * *</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>OUAF_URL</name>
+<defaultValue>http://172.30.2.45:9602/ouaf/</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>BASE_URL</name>
+<defaultValue>http://172.30.2.45</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>KEYCLOAK_BASE_URL</name>
+<defaultValue>http://172.30.2.45:8443/auth</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>DB_BASE_URL</name>
+<defaultValue>172.30.2.45</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>MDMURL</name>
+<defaultValue>https://65.1.5.215:8003/ouaf/</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>KAFKA_HOST_VALUE</name>
+<defaultValue>172.30.2.45</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>KAFKA_PORT_VALUE</name>
+<defaultValue>9092</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>KAFKA_URL_VALUE</name>
+<defaultValue>172.30.2.45:9092</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>APP_URL_VALUE</name>
+<defaultValue>http://172.30.2.45</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>TENANT_CODE_VALUE</name>
+<defaultValue>EMI</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>USAGE_PRODUCER_SCHEDULER_VALUE</name>
+<defaultValue>0 * * * *</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>USAGE_FILE_UPLOAD_PATH_VALUE</name>
+<defaultValue>./src/assets</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>AWS_SNS_MOCK_CONFIG_VALUE</name>
+<defaultValue>false</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>SEARCH_SCHEDULER_INTERVAL_VALUE</name>
+<defaultValue>0 0 * * *</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>RAZORPAY_URL</name>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>RAZORPAY_KEY</name>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>ADSS_ADMIN_URL_VALUE</name>
+<defaultValue>http://172.30.2.45/admin/</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>HEALTH_CHECK_MAIL_RECIPIENTS_VALUE</name>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>HEALTH_CHECK_USER_USERNAME_VALUE</name>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>CONTAINER_TOTAL_MEMORY_IN_MB_VALUE</name>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>ELASTIC_SEARCH_USER_VALUE</name>
+<defaultValue>elastic</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>SFTP_C2M_HOST_VALUE</name>
+<defaultValue>http://172.30.2.45</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>SFTP_C2M_USER_VALUE</name>
+<defaultValue>readonlyuser</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>USAGE_RATE_CONFIG_SCHEDULER_VALUE</name>
+<defaultValue>0 0 * * *</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>USAGE_FALLBACK_PRODUCER_SCHEDULER_VALUE</name>
+<defaultValue>0 0 * * *</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>ELASTICSEARCH_HOSTS_VALUE</name>
+<defaultValue>http://172.30.2.45:9200</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>ELASTICSEARCH_VALUE</name>
+<defaultValue>172.30.2.45:9200</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>ELASTICSEARCH_URL_VALUE</name>
+<defaultValue>http://elasticsearch:9200</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>ENTITY_PATH_VALUE</name>
+<defaultValue>dist/database/entity/**/*.js</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>REACT_APP_NEWS_API_URL_VALUE</name>
+<defaultValue>https://newsapi.org/v2/everything?q=utilities\&sortBy=utilities\&apiKey=976cb853633d4d82a3c3b0c198e35bc7</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>REACT_APP_NEWS_KEY_NAME_VALUE</name>
+<defaultValue>articles</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>APP_ADMIN_UI_URL_VALUE</name>
+<defaultValue>http://172.30.2.45</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>ADMIN_UI_USER_EMAIL_ID_VALUE</name>
+<defaultValue>admin@mailinator.com</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>ADMIN_UI_USER_PASSWORD_VALUE</name>
+<defaultValue>Abjayon@2021</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>EDGE_SYSTEM_VALUE</name>
+<defaultValue>C2M</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>SNS_PROVIDER</name>
+<defaultValue>EMI</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>SMS_GATEWAY_ENDPOINT</name>
+<defaultValue>https://smartmessaging.etisalat.ae:9095/campaignService/campaigns/qs</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>SMS_GATEWAY_USERNAME</name>
+<defaultValue>Flordeliza79</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>ENVIRONMENT_DOMAIN_BASE_URL</name>
+<defaultValue>https://impresacx-dev.emicool.com</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+<hudson.model.StringParameterDefinition>
+<name>OUCCS_USERNAME_VALUE</name>
+<defaultValue>vishantkumar.vaghani@abjayon.com</defaultValue>
+<trim>false</trim>
+</hudson.model.StringParameterDefinition>
+</parameterDefinitions>
+</hudson.model.ParametersDefinitionProperty>
+</properties>
+<scm class="hudson.plugins.git.GitSCM" plugin="git@5.0.2">
+<configVersion>2</configVersion>
+<userRemoteConfigs>
+<hudson.plugins.git.UserRemoteConfig>
+<url>https://bitbucket.org/abjayondigitalselfservice/adss-docker</url>
+<credentialsId>adss-app-password-17-11-2022</credentialsId>
+</hudson.plugins.git.UserRemoteConfig>
+</userRemoteConfigs>
+<branches>
+<hudson.plugins.git.BranchSpec>
+<name>*/develop-emicool</name>
+</hudson.plugins.git.BranchSpec>
+</branches>
+<doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+<submoduleCfg class="empty-list"/>
+<extensions/>
+</scm>
+<assignedNode>EMICOOL-DEV</assignedNode>
+<canRoam>false</canRoam>
+<disabled>false</disabled>
+<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+<triggers/>
+<concurrentBuild>false</concurrentBuild>
+<builders>
+<hudson.tasks.Shell>
+<command>#Base environment variables sed -i "s,ENVIRONMENT_BASE_URL,${BASE_URL},g" *.yml sed -i "s,DATABASE_BASE_URL,${DB_BASE_URL},g" docker-compose.yml sed -i "s,KEY_CLOAK_URL_VALUE,${KEYCLOAK_BASE_URL},g" docker-compose.yml #sed -i "s,ACCESS_KEY,${AWS_ACCESS_KEY},g" docker-compose.yml #sed -i "s,SECRET_KEY,${AWS_SECRET_KEY},g" docker-compose.yml sed -i "s,REGION_OF_AWS,${aws_region},g" docker-compose.yml sed -i "s,ELASTIC_SEARCH_URL_VALUE,${ELASTIC_SEARCH_URL_VALUE},g" docker-compose.yml #Sub Domains sed -i "s,BASE_URL_FIELD,${fieldwork_base_url},g" docker-compose-fieldwork.yml sed -i "s,BASE_URL_INSIGHTS,${insights_base_url},g" docker-compose-insights.yml #Database environment variables sed -i "s,auth_db_user,${DB_USER_AUTH},g" docker-compose.yml sed -i "s,auth_db_password,${DB_PASSWORD},g" docker-compose.yml sed -i "s,admin_db_user,${DB_USER_ADMIN},g" docker-compose.yml sed -i "s,admin_db_password,${DB_PASSWORD},g" docker-compose.yml sed -i "s,usage_db_user,${DB_USER_USAGE},g" docker-compose.yml sed -i "s,usage_db_password,${DB_PASSWORD},g" docker-compose.yml sed -i "s,communication_db_user,${DB_USER_COMMUNICATION},g" docker-compose.yml sed -i "s,communication_db_password,${DB_PASSWORD},g" docker-compose.yml sed -i "s,integration_db_user,${DB_USER_INTEGRATION},g" docker-compose.yml sed -i "s,integration_db_password,${DB_PASSWORD},g" docker-compose.yml sed -i "s,KEYCLOAK_DB_USER,${USER_DB_KEYCLOAK},g" docker-compose.yml sed -i "s,KEYCLOAK_DB_PASSWORD,${PASSWORD_DB_KEYCLOAK},g" docker-compose.yml sed -i "s,KEYCLOAK_DB_SCHEMA,${KEYCLOAK_SCHEMA},g" docker-compose.yml sed -i "s,ENVIRONMENT_DOMAIN_BASE_URL,${ENVIRONMENT_DOMAIN_BASE_URL},g" docker-compose.yml #Keycloak environment variables sed -i "s,CLIENT_ID_KEYCLOAK,${CLIENT_ID_KEYCLOAK},g" docker-compose.yml sed -i "s,USER_NAME_KEYCLOAK,${USER_NAME_KEYCLOAK},g" docker-compose.yml sed -i "s,PASSWORD_KEYCLOAK,${PASSWORD_KEYCLOAK},g" docker-compose.yml sed -i "s,REALM_VALUE,${REALM_VALUE},g" docker-compose.yml sed -i "s,ENVIRONMENT_BASE_URL,${DB_BASE_URL},g" hazelcast.yml sed -i "s,KEYCLOAK_UI_SECRET,${AUTH_UI_SECRET_KEYCLOAK},g" docker-compose.yml sed -i "s,CLIENT_ID_KEYCLOAK,${CLIENT_ID_KEYCLOAK},g" docker-compose-rocket-chat.yml sed -i "s,KEYCLOAK_CLIENT_SECRET_VALUE,${KEYCLOAK_CLIENT_SECRET_VALUE},g" docker-compose-rocket-chat.yml sed -i "s,KEYCLOAK_CLIENT_SECRET_VALUE,${KEYCLOAK_CLIENT_SECRET_VALUE},g" docker-compose.yml #SMTP environment Variables sed -i "s,SMTP_MAIL_ID_VALUE,${SMTP_MAIL_ID},g" docker-compose.yml sed -i "s,SMTP_MAIL_HOST_VALUE,${SMTP_MAIL_HOST},g" docker-compose.yml sed -i "s,SMTP_MAIL_PORT_VALUE,${SMTP_MAIL_PORT},g" docker-compose.yml sed -i "s,SMTP_MAIL_USER_VALUE,${SMTP_MAIL_USER},g" docker-compose.yml sed -i "s,SMTP_MAIL_PASSWORD_VALUE,${SMTP_MAIL_PASSWORD},g" docker-compose.yml #SMS environment Variables sed -i "s,EMICOOL_SMS_GATEWAY_ENDPOINT_VALUE,${SMS_GATEWAY_ENDPOINT},g" docker-compose.yml sed -i "s,EMICOOL_SMS_GATEWAY_USERNAME_VALUE,${SMS_GATEWAY_USERNAME},g" docker-compose.yml sed -i "s,EMICOOL_SMS_GATEWAY_PASSWORD_VALUE,${SMS_GATEWAY_PASSWORD},g" docker-compose.yml sed -i "s,SNS_PROVIDER_VALUE,${SNS_PROVIDER},g" docker-compose.yml #Database entity path sed -i "s,ENTITY_PATH_VALUE,${ENTITY_PATH_VALUE},g" docker-compose.yml #OUAF environment Variables sed -i "s,USER_OUAF,${OUAFUSER},g" docker-compose.yml sed -i "s,PASSWORD_OUAF,${OUAFPASSWORD},g" docker-compose.yml sed -i "s,USER_MDM,${MDMUSER},g" docker-compose.yml sed -i "s,PASSWORD_MDM,${MDMPASSWORD},g" docker-compose.yml sed -i "s,URL_MDM,${MDMURL},g" docker-compose.yml sed -i "s,USER_CCB,${CCBUSER},g" docker-compose.yml sed -i "s,PASSWORD_CCB,${CCBPASSWORD},g" docker-compose.yml sed -i "s,EXTERNAL_INTEGRATION_URL,${OUAF_URL},g" docker-compose.yml sed -i "s,ENVIRONMENT_BASE_URL,${BASE_URL},g" metricbeat.yml #Rocket-chat environment variables sed -i "s,CHAT_BOT_USER,${CHAT_BOT_USER},g" docker-compose-rocket-chat.yml sed -i "s,CHAT_BOT_PASS,${CHAT_BOT_PASS},g" docker-compose-rocket-chat.yml sed -i "s,CHAT_BOT_NAME,${CHAT_BOT_NAME},g" docker-compose-rocket-chat.yml sed -i "s,ROCKET_CHAT_USERNAME_VALUE,${ROCKET_CHAT_USERNAME},g" docker-compose.yml sed -i "s,ROCKET_CHAT_USER_PASSWORD_VALUE,${ROCKET_CHAT_USER_PASSWORD},g" docker-compose.yml #Other environment variables sed -i "s,BASE_TENANT_CODE,${BASE_TENANT_CODE},g" docker-compose.yml sed -i "s,RAZORPAY_URL,${RAZORPAY_URL},g" docker-compose.yml sed -i "s,RAZORPAY_KEY,${RAZORPAY_KEY},g" docker-compose.yml sed -i "s,SEARCH_SCHEDULER_INTERVAL_VALUE,${SEARCH_SCHEDULER_INTERVAL_VALUE},g" docker-compose.yml sed -i "s,AWS_SNS_MOCK_CONFIG_VALUE,${AWS_SNS_MOCK_CONFIG_VALUE},g" docker-compose.yml sed -i "s,REACT_APP_NEWS_API_URL_VALUE,${REACT_APP_NEWS_API_URL_VALUE},g" docker-compose.yml sed -i "s,REACT_APP_NEWS_KEY_NAME_VALUE,${REACT_APP_NEWS_KEY_NAME_VALUE},g" docker-compose.yml #sed -i "s,OTP_PASSWORD_EXTENSION,${DOCKER_OTP_PASSWORD_VALUE},g" docker-compose.yml sed -i "s,DOCKER_OTP_PASSWORD_VALUE,${DOCKER_OTP_PASSWORD_VALUE},g" docker-compose.yml sed -i "s,HAZELCAST_HOST_PORT_VALUE,${HAZELCAST_HOST_PORT_VALUE},g" docker-compose.yml sed -i "s,ENVIRONMENT_BASE_URL,${BASE_URL},g" docker-compose-rocket-chat.yml sed -i "s,BASE_TENANT_CODE,${BASE_TENANT_CODE},g" docker-compose-rocket-chat.yml sed -i "s,POPUP_PUBLIC_VAPID_VALUE,${POPUP_PUBLIC_VAPID_VALUE},g" docker-compose.yml sed -i "s,POPUP_PRIVATE_VAPID_VALUE,${POPUP_PRIVATE_VAPID_VALUE},g" docker-compose.yml sed -i "s,ADSS_ADMIN_URL_VALUE,${ADSS_ADMIN_URL_VALUE},g" docker-compose.yml #Healthcheck variables sed -i "s/HEALTH_CHECK_MAIL_RECIPIENTS_VALUE/${HEALTH_CHECK_MAIL_RECIPIENTS_VALUE}/g" docker-compose.yml sed -i "s,HEALTH_CHECK_USER_USERNAME_VALUE,${HEALTH_CHECK_USER_USERNAME_VALUE},g" docker-compose.yml sed -i "s,HEALTH_CHECK_USER_PWD_VALUE,${HEALTH_CHECK_USER_PWD_VALUE},g" docker-compose.yml sed -i "s,CONTAINER_TOTAL_MEMORY_IN_MB_VALUE,${CONTAINER_TOTAL_MEMORY_IN_MB_VALUE},g" docker-compose.yml #usage service env variables for aws sdk sed -i "s,AWS_ACCESS_KEY_USAGE,${AWS_ACCESS_KEY_USAGE},g" docker-compose.yml sed -i "s,AWS_SECRET_ACCESS_KEY_USAGE,${AWS_SECRET_ACCESS_KEY_USAGE},g" docker-compose.yml #usage service env variables for admin-ui sed -i "s,APP_ADMIN_UI_URL_VALUE,${APP_ADMIN_UI_URL_VALUE},g" docker-compose.yml sed -i "s,ADMIN_UI_USER_EMAIL_ID_VALUE,${ADMIN_UI_USER_EMAIL_ID_VALUE},g" docker-compose.yml sed -i "s,ADMIN_UI_USER_PASSWORD_VALUE,${ADMIN_UI_USER_PASSWORD_VALUE},g" docker-compose.yml #ELK Stack configuration #metricbeat.yml sed -i 's/\/u01\/docker/\/var\/lib\/docker/'g filebeat.yml sed -i 's/\/var\/lib\/docker/\/u01\/docker/'g docker-compose-elk.yml sed -i "s,ENVIRONMENT_HOSTNAME,${DB_BASE_URL},g" logstash-mysql.conf sed -i "s,JDBC_USER,${USER_DB_KEYCLOAK},g" logstash-mysql.conf sed -i "s,JDBC_PASSWORD,${PASSWORD_DB_KEYCLOAK},g" logstash-mysql.conf sed -i "s,SCHEDULE_INTERVAL,${MYSQL_SCHEDULE_INTERVAL},g" logstash-mysql.conf sed -i "s,ELASTIC_SEARCH_USER_VALUE,${ELASTIC_SEARCH_USER_VALUE},g" docker-compose.yml sed -i "s,ELASTIC_SEARCH_PASSWORD_VALUE,${ELASTIC_SEARCH_PASSWORD_VALUE},g" docker-compose.yml sed -i "s,ELASTICSEARCH_URL_VALUE,${ELASTICSEARCH_URL_VALUE},g" docker-compose-elk.yml sed -i "s,ELASTICSEARCH_HOSTS_VALUE,${ELASTICSEARCH_HOSTS_VALUE},g" docker-compose-elk.yml #ELK authentication #Elasticsearch sed -i "s,ELASTICSEARCH_USERNAME_VALUE,${ELASTICSEARCH_USERNAME_VALUE},g" docker-compose-elk.yml sed -i "s,ELASTIC_PASSWORD_VALUE,${ELASTIC_PASSWORD_VALUE},g" docker-compose-elk.yml sed -i "s,KIBANA_SYSTEM_USERNAME_VALUE,${KIBANA_SYSTEM_USERNAME_VALUE},g" docker-compose-elk.yml sed -i "s,KIBANA_SYSTEM_PASSWORD_VALUE,${KIBANA_SYSTEM_PASSWORD_VALUE},g" docker-compose-elk.yml sed -i "s,LOGSTASH_SYSTEM_USERNAME_VALUE,${LOGSTASH_SYSTEM_USERNAME_VALUE},g" docker-compose-elk.yml sed -i "s,LOGSTASH_SYSTEM_PASSWORD_VALUE,${LOGSTASH_SYSTEM_PASSWORD_VALUE},g" docker-compose-elk.yml sed -i "s,BEATS_SYSTEM_USERNAME_VALUE,${BEATS_SYSTEM_USERNAME_VALUE},g" docker-compose-elk.yml sed -i "s,BEATS_SYSTEM_PASSWORD_VALUE,${BEATS_SYSTEM_PASSWORD_VALUE},g" docker-compose-elk.yml #kibana sed -i "s,ELASTICSEARCH_USERNAME_KIBANA,${ELASTICSEARCH_USERNAME_KIBANA},g" docker-compose-elk.yml sed -i "s,ELASTICSEARCH_PASSWORD_KIBANA,${ELASTICSEARCH_PASSWORD_KIBANA},g" docker-compose-elk.yml #Logstash sed -i "s,ELASTICSEARCH_USERNAME_LOGSTASH,${ELASTICSEARCH_USERNAME_LOGSTASH},g" docker-compose-elk.yml sed -i "s,ELASTICSEARCH_PASSWORD_LOGSTASH,${ELASTICSEARCH_PASSWORD_LOGSTASH},g" docker-compose-elk.yml #filebeat sed -i "s,BEATS_SYSTEM_USERNAME_VALUE,${BEATS_SYSTEM_USERNAME_VALUE},g" docker-compose-elk.yml sed -i "s,BEATS_SYSTEM_PASSWORD_VALUE,${BEATS_SYSTEM_PASSWORD_VALUE},g" docker-compose-elk.yml sed -i "s,ELASTICSEARCH_VALUE,${ELASTICSEARCH_VALUE},g" logstash.conf sed -i "s,ELASTICSEARCH_USERNAME_VALUE,${ELASTICSEARCH_USERNAME_VALUE},g" logstash.conf sed -i "s,ELASTIC_PASSWORD_VALUE,${ELASTIC_PASSWORD_VALUE},g" logstash.conf #OUCCS Variables sed -i "s,OUCCS_USERNAME_VALUE,${OUCCS_USERNAME_VALUE},g" docker-compose.yml sed -i "s,OUCCS_PASSWORD_VALUE,${OUCCS_PASSWORD_VALUE},g" docker-compose.yml</command>
+<configuredLocalRules/>
+</hudson.tasks.Shell>
+</builders>
+<publishers>
+<hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.99">
+<recipientList>$DEFAULT_RECIPIENTS</recipientList>
+<configuredTriggers>
+<hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+<email>
+<subject>$PROJECT_DEFAULT_SUBJECT</subject>
+<body>$PROJECT_DEFAULT_CONTENT</body>
+<recipientProviders/>
+<attachmentsPattern/>
+<attachBuildLog>false</attachBuildLog>
+<compressBuildLog>false</compressBuildLog>
+<replyTo>$PROJECT_DEFAULT_REPLYTO</replyTo>
+<contentType>project</contentType>
+</email>
+</hudson.plugins.emailext.plugins.trigger.FailureTrigger>
+</configuredTriggers>
+<contentType>default</contentType>
+<defaultSubject>$DEFAULT_SUBJECT</defaultSubject>
+<defaultContent>$DEFAULT_CONTENT</defaultContent>
+<attachmentsPattern/>
+<presendScript>$DEFAULT_PRESEND_SCRIPT</presendScript>
+<postsendScript>$DEFAULT_POSTSEND_SCRIPT</postsendScript>
+<attachBuildLog>false</attachBuildLog>
+<compressBuildLog>false</compressBuildLog>
+<replyTo>$DEFAULT_REPLYTO</replyTo>
+<from/>
+<saveOutput>false</saveOutput>
+<disabled>false</disabled>
+</hudson.plugins.emailext.ExtendedEmailPublisher>
+</publishers>
+<buildWrappers>
+<com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
+<varPasswordPairs>
+<varPasswordPair password="{AQAAABAAAAAglcvAluAqEgALl3yUKskH+xbjC4Ei6LQfMjnfGF3ztYpT6bl3+TmMHmSWu5vuxOah}" var="AWS_ACCESS_KEY"/>
+<varPasswordPair password="{AQAAABAAAAAwplJDfH18X1bwSDsNNZISTMpjFUkQLjrw0wdVkvGH+ClVV3Fx3jiAq1ocrVoAH2w8uGOnHSg9k9/PRNWZramq3Q==}" var="AWS_SECRET_KEY"/>
+<varPasswordPair password="{AQAAABAAAAAQR0X/QbrIetamOeU4yUfLX+/MfLKhNm0IIHeR8USWcqw=}" var="USER_NAME_KEYCLOAK"/>
+<varPasswordPair password="{AQAAABAAAAAQxTEV33qLU2O6fQoDbhjjN2CKNkWublABnNKInI10KEY=}" var="PASSWORD_KEYCLOAK"/>
+<varPasswordPair password="{AQAAABAAAAAwnJovAOQ5pynJ3d288Cl6inHjoxHmgK1K9yImFSUh7wV7vCyUnXqrAZRTWhmPxqoGNV026ZawNUtWB4SFouLawA==}" var="KEYCLOAK_CLIENT_SECRET_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQDiIC1AVUD06qJ9aidp5y1JcalQXw8mLtSSoVyY3hObc=}" var="CHAT_BOT_USER"/>
+<varPasswordPair password="{AQAAABAAAAAQO6qOxuB/CKbwwJUVZ2Im2BopOby4xz4KR3G1f5LOiIY=}" var="CHAT_BOT_PASS"/>
+<varPasswordPair password="{AQAAABAAAAAgcOKRygFGKdo96hcfZ6LH4qh46PFMrJk6T6U6bwEn/YJXUuuzEAEn0YkR5547ctKG}" var="ROCKET_CHAT_USERNAME"/>
+<varPasswordPair password="{AQAAABAAAAAQtgFuEKGNfgKh7L2y5nrWS7Qge11kVHDnD/wg3zYa9jk=}" var="ROCKET_CHAT_USER_PASSWORD"/>
+<varPasswordPair password="{AQAAABAAAAAQerkv9VnUU6597GPcZKqeOUGnVrfi84y/mbQyufFDNNg=}" var="OTP_PASSWORD_EXTENSION"/>
+<varPasswordPair password="{AQAAABAAAAAQJi/q5h0lr0FYgnowMM3YrphNMsJ89ETqbwXKVltPpuk=}" var="DB_USER_AUTH"/>
+<varPasswordPair password="{AQAAABAAAAAQIbQD1miRDa9VkhRR3HukYeCP+o081++z7W2h5h1vwhg=}" var="DB_PASSWORD"/>
+<varPasswordPair password="{AQAAABAAAAAQcUyd9WqJP/4oNset+ki9lwwuQzf542JR02EBKBHeRP4=}" var="DB_USER_ADMIN"/>
+<varPasswordPair password="{AQAAABAAAAAgM/hqfkyhl87rQ4KEtn822KJQunSJwnfpaOxUv2qagDO/nBn6fM37HfYTqvD+EUYZ}" var="DB_USER_USAGE"/>
+<varPasswordPair password="{AQAAABAAAAAgKbip/5LbEKJ4uzBOvr921z4wxcSMIyNwEMi2p1KRHcQvzkZItbdLx3vcQZtoy+Yx}" var="DB_USER_COMMUNICATION"/>
+<varPasswordPair password="{AQAAABAAAAAgxbPSRBeSJd9Cs5R1D2327FpnPYFPBb286xxbjybeHYgvM4SbLp/rkHHkuFwX1UAA}" var="DB_USER_INTEGRATION"/>
+<varPasswordPair password="{AQAAABAAAAAQ+B6kPuamGyk2AWS7NmNmA4yYlX11WAqEPH9VASUElNw=}" var="OUAFUSER"/>
+<varPasswordPair password="{AQAAABAAAAAQ9R0Nd2NQPhe+5WJMGlwprjgwucUk7J/iAmORyKNNWB8=}" var="OUAFPASSWORD"/>
+<varPasswordPair password="{AQAAABAAAAAQsmroJ1jnJtV/nrsjxmmi5q1UJhwl+5haUNchRF+Wsn8=}" var="USER_DB_KEYCLOAK"/>
+<varPasswordPair password="{AQAAABAAAAAQ+4H1M1KnP5ksW2mWExO0BkBjo6qh7prw9IaS7w7836Y=}" var="PASSWORD_DB_KEYCLOAK"/>
+<varPasswordPair password="{AQAAABAAAAAQYxrBeAsFI4PMl4cAnYckfkMnkHi7n7B2hdTxi3Evz2E=}" var="KEYCLOAK_SCHEMA"/>
+<varPasswordPair password="{AQAAABAAAABgrB5rctqjwDZ6PrqlLfezf2vzIVUsy/pV/cKeA1x2wLGomJbV1FYn/MQpOgo+boJ8/IK1KhH1eOfxvaPCcUcJLixHo+0k3wDbTNjVfBahBQySNsKZx5eAe8x734qHMD7d6QGn5E+00+1WqluhuryYXQ==}" var="SMTP_MAIL_PASSWORD"/>
+<varPasswordPair password="{AQAAABAAAAAQegCorlBixkhim1wKBrTb4rnMbgCeHqOwG1nib96FkNs=}" var="MDMUSER"/>
+<varPasswordPair password="{AQAAABAAAAAQUVZogHBcuOxxT6z97Uq9psnpZ7nSqdyjiPTuuyFVNAY=}" var="CCBUSER"/>
+<varPasswordPair password="{AQAAABAAAAAQ795nRnVicuOdNKyo2a87+kF0rEeHwgUyBR5NXh1pI/g=}" var="MDMPASSWORD"/>
+<varPasswordPair password="{AQAAABAAAAAQSmTWVRWtVRd4evZmiKi5PV/eB2K7RyFmlTwrPmmMSXQ=}" var="CCBPASSWORD"/>
+<varPasswordPair password="{AQAAABAAAAAw7yuBUWGxaAW3ZBsNPDUTgQBxgApSM/ZiGtGJykp2o8TeQoLW+nUls6oRu5M6gNedwYcRwXe0DJxCrV6cFki72w==}" var="POPUP_PRIVATE_VAPID_VALUE"/>
+<varPasswordPair password="{AQAAABAAAABgVnursyJlJo/+xvSUVXYfUwJPvlnBrwdVa8QgqSgsIbze7IcYmLqyxXIHMO0rX886Cii/SGezc4X2VB6xvuYp8rIPj3fgq5sxwgRZjXyW5TxZVI6b5yxFPd4cJs35DYG9DT4roWUTkys0tuHvPldmPA==}" var="POPUP_PUBLIC_VAPID_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAgA1mLv+LEM/HSoQ6Z7BEb5Ido1DMJo4y7krD5xBt3CzxT5rLey4b9f/T8FACzCBiw}" var="ELASTIC_SEARCH_URL_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQKqrYzkZ5hVZXnQP0WHk8Hq7TEe7s48ohxrBTEkYrJNc=}" var="ELASTIC_SEARCH_PASSWORD_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQQBFpyFCC2UYWJiolwz477Jp8IjHn1mrbXk4CYR770H8=}" var="ELASTICSEARCH_USERNAME_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQPQEEhGXRMuRfJ5sCUOiSoBS8so0x7ikslRU/Q5qBSn8=}" var="ELASTIC_PASSWORD_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQRHZeTOZHl+h+uNxsY14yO36sBMOXTMisptnh/oVf6aI=}" var="KIBANA_SYSTEM_USERNAME_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQxJAFV3H7bGOdzK+b6r6w5DoQUjyJvO94jtriVV2V8F0=}" var="KIBANA_SYSTEM_PASSWORD_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQz/fermyWCPRHjVGrzNzUf/aJQ6Anbdle6wqNpOoF6NQ=}" var="LOGSTASH_SYSTEM_USERNAME_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAgbC3sy4KReZPnttmLZBG3M+QcIstdz5MHOuufTFPz0eV4u3N9LtT9fRXml7j9ucwE}" var="LOGSTASH_SYSTEM_PASSWORD_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQOr8GRRqnZGWiDkIXJQVmGj7D90XMKt92U2hh+U6dKgs=}" var="BEATS_SYSTEM_USERNAME_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQrZczFHJWDOtDr7nI5zbjsci6493MScIAwXQV63o1W5U=}" var="BEATS_SYSTEM_PASSWORD_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQp+nMdJQtylrblnKUoW6VtpukU9ZJ6M9DfTEPl5CBjsc=}" var="ELASTICSEARCH_USERNAME_KIBANA"/>
+<varPasswordPair password="{AQAAABAAAAAQmRWZ/kQRHsBRBG5EsUPWOkMwwMbb0VVHXCdNOgAlFcY=}" var="ELASTICSEARCH_PASSWORD_KIBANA"/>
+<varPasswordPair password="{AQAAABAAAAAQAFTPzVVqSP3VOYnAS1QGc6jtOb32z+PiUCJnwiUDuxk=}" var="ELASTICSEARCH_USERNAME_LOGSTASH"/>
+<varPasswordPair password="{AQAAABAAAAAgL7zHitNap+VkldCPvaZUgw0IG3aU8W5wY3aP3y+lxH+nKUOXXINCHjS6eoN4Hcpm}" var="ELASTICSEARCH_PASSWORD_LOGSTASH"/>
+<varPasswordPair password="{AQAAABAAAAAQXg/7ShgALcMGVdg6C6OMUv5fZm/dniUevi4ryDWwo2Y=}" var="BEATS_SYSTEM_USERNAME_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQfezOU3vDlg87fx6njaFp5t+pGRGOREwA3NVXt5159h8=}" var="BEATS_SYSTEM_PASSWORD_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQUkw/Oo3mRCMjbI1wCHgCiBorelDBeLCgmobrwWGxoNQ=}" var="DOCKER_OTP_PASSWORD_VALUE"/>
+<varPasswordPair password="{AQAAABAAAABgL4cethZFW2BEXqQ0lDRy+TS26O07fIrNTlR9iL6rP+HUANSyPHbv5iZ0okO6lR0VTBLc3mNDgRadZC3eOlr7p9VvCt3dvz9XA/1sV4UxXON7gwTeMIrx5uZJSBziuMX1KA7nOu6k7oOe2M1G049Y7A==}" var="PUSH_VAP_PUBLIC_KEY_VALUE"/>
+<varPasswordPair password="{AQAAABAAAAAQQNlwxwrmpqSoYUnZlKlGNjS/pwPDgC3JknEIt897QBI=}" var="SMS_GATEWAY_PASSWORD"/>
+<varPasswordPair password="{AQAAABAAAAAQG3I8cp9+NcNOjfi49OYxuFWIJZyOaqEKCCPITQ5naE4=}" var="OUCCS_PASSWORD_VALUE"/>
+</varPasswordPairs>
+</com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
+</buildWrappers>
+</project>
